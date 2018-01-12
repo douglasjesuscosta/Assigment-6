@@ -1,0 +1,54 @@
+
+  
+  <form class="app-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div>
+      <div class="form-group">
+
+        <label for="name">Nome do curso</label>
+        <input required 
+               [(ngModel)]="course.name" 
+               name="name" id="name" #name="ngModel" 
+               type="text" 
+               class="form-control" 
+               minlength="10"
+               maxlength="20">
+
+        <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+          <div *ngIf="name.errors.required">
+            Name is required
+          </div>
+          <div *ngIf="name.errors.minlength">
+            First name should have at least {{name.errors.minlength.requiredLength}} letters
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            First name should have just 10 letters
+          </div>
+          <div *ngIf="name.errors.pattern">
+            First name does not match the pattern
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="categorySelect">Categoria:</label>
+      <select required name="categorySelect" #categorySelected="ngModel"[(ngModel)]="course.category.id" class="form-control" id="categorySelect" #categorySelect="ngModel">
+        <option value=""></option>
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+      <div *ngIf="categorySelected.touched && categorySelected.invalid" class="alert alert-danger">
+        Category field is required.
+      </div>
+    </div>
+
+
+    <div  class="checkbox form-group">
+      <label for="moneyBack">
+        <input type="checkbox" ngModel name="moneyBack" [(ngModel)]="course.moneyBack" id="moneyBack">  
+        Money back in 30 days
+      </label>
+    </div>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  </form>

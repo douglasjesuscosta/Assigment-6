@@ -1,0 +1,33 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>
+        Course Id
+      </td>
+      <td>
+        Course name
+      </td>
+      <td>
+        Course category
+      </td>
+      <td>
+        Money back
+      </td>
+      <td>
+        Actions
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let course of courses">
+      <td>{{course.id}}</td>
+      <td>{{course.name}}</td>
+      <td>{{course.category.name}}</td>
+      <td>{{course.moneyBack}}</td>
+      <td><button class="btn btn-success" (click)="update(course)">Update</button></td>
+      <td><button class="btn btn-danger" (click)="delete(course)">Delete</button></td>
+    </tr>
+
+  </tbody>
+
+</table>
